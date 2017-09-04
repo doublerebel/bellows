@@ -60,7 +60,7 @@ func FlattenPrefixed(value interface{}, prefix string) map[string]interface{} {
 func FlattenPrefixedToResult(value interface{}, prefix string, m map[string]interface{}) {
 	base := ""
 	if prefix != "" {
-		base = prefix+"."
+		base = prefix+"_"
 	}
 
 	original := reflect.ValueOf(value)
