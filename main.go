@@ -10,16 +10,19 @@ import (
 	"strings"
 )
 
+// Expand expands the specified map
 func Expand(value map[string]interface{}) map[string]interface{} {
 	return ExpandPrefixed(value, "")
 }
 
+// ExpandPrefixed expand the specified map with the givven prefix
 func ExpandPrefixed(value map[string]interface{}, prefix string) map[string]interface{} {
 	m := make(map[string]interface{})
 	ExpandPrefixedToResult(value, prefix, m)
 	return m
 }
 
+// ExpandPrefixedToResult expand the specified values info the specified result var
 func ExpandPrefixedToResult(value map[string]interface{}, prefix string, result map[string]interface{}) {
 	if prefix != "" {
 		prefix += "."
@@ -47,20 +50,27 @@ func ExpandPrefixedToResult(value map[string]interface{}, prefix string, result 
 	}
 }
 
+// Flatten flatten the specified nested value
 func Flatten(value interface{}) map[string]interface{} {
 	return FlattenPrefixed(value, "")
 }
 
+// FlattenPrefixed flatten the specified nested value but with custom prefix
 func FlattenPrefixed(value interface{}, prefix string) map[string]interface{} {
 	m := make(map[string]interface{})
 	FlattenPrefixedToResult(value, prefix, m)
 	return m
 }
 
+// FlattenPrefixedToResult flatten the specified value using the specified prefix into the specified prefix
 func FlattenPrefixedToResult(value interface{}, prefix string, m map[string]interface{}) {
 	base := ""
 	if prefix != "" {
-		base = prefix+"."
+		base = prefix + "."
+	}
+
+	if value == nil {
+		value = ""
 	}
 
 	original := reflect.ValueOf(value)
